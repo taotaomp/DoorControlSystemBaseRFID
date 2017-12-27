@@ -19,7 +19,7 @@ public class CardRead {
 
     /**
      * 接收返回的卡号信息
-     * @return NaN：接收失败 否则成功
+     * @return NoResult：接收失败 否则成功
      */
     public String receiveCardMessage(){
         return WiFiOperation.messageReceiver(socket);

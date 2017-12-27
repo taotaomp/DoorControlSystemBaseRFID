@@ -18,4 +18,8 @@ public class Const {
     //RFID常量
     public static String DoorOpenCmd = "0C 10 00 78 00 01 02 00 01 35 78";
     public static String CardReadCmd = "FFFF0A";
+    public static String DoorDepartment = "";
+
+    //其他常量
+    public static final String NoResult= "NoResult";
 }

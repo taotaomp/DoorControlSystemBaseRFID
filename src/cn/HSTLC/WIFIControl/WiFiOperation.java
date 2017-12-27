@@ -1,5 +1,6 @@
 package cn.HSTLC.WIFIControl;
 
+import cn.HSTLC.ToolConst.Const;
 import cn.HSTLC.ToolConst.HexStrConvert;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class WiFiOperation {
             return HexStrConvert.bytesToHexString(bytes);
         } catch (IOException e) {
             e.printStackTrace();
-            return "NaN";
+            return Const.NoResult;
         }
 
     }
