@@ -63,5 +63,28 @@ public class StaffBase {
         }
     }
 
+    /**
+     * 储存员工信息的方法
+     * @param staffInfo 封装好的员工信息
+     * @return true:成功 false:不成功
+     * @throws SQLException
+     */
+    public boolean staffInfoReleaseStore(String staffInfo) throws SQLException {
+        String[] staffInfoPart = staffInfo.split("#");
+        String sql = "insert into "+ Const.dbTableName + " values("+
+                "\'"+ staffInfoPart[0] +"\'"+
+                "\'"+ staffInfoPart[1] +"\'"+
+                "\'"+ staffInfoPart[2] +"\'"+
+                "\'"+ staffInfoPart[3] +"\'"+
+                "\'"+ staffInfoPart[4] +"\'"+
+                "\'"+ staffInfoPart[5] +"\'"+
+                "\'"+ staffInfoPart[6] +"\'"+
+                ");";
+        if (dataBase.infoOperate(sql)>0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }
