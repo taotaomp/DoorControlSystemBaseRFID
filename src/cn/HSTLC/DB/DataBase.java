@@ -8,11 +8,15 @@ public class DataBase {
 
     private Connection conn;
 
+    public DataBase(){
+        getConnection();
+    }
+
     /**
      * 数据库连接获取方法
      * @return true成功 false失败
      */
-    public boolean getConnection(){
+    private boolean getConnection(){
         try {
             Class.forName(Const.dbDriver);          //装载数据库驱动
             conn = DriverManager.getConnection(Const.url,Const.usr,Const.passwd);   //连接数据库
