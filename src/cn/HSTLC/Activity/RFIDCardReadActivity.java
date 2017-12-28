@@ -2,6 +2,8 @@ package cn.HSTLC.Activity;
 
 import cn.HSTLC.RFIDControl.CardRead;
 
+import java.io.IOException;
+
 public class RFIDCardReadActivity implements Runnable {
     @Override
     public void run() {
@@ -15,7 +17,7 @@ public class RFIDCardReadActivity implements Runnable {
 
             try {
                 if (!MainActivity.mainFrameIsClickRunButton) {
-                    synchronized (MainActivity.readCardID_From_RFIDCardReadActivity){
+                    synchronized (MainActivity.readCardID_From_RFIDCardReadActivity) {
                         System.out.println("Rfid活动停止");
                         MainActivity.RFIDCardReadActivityIsWait = true;
                         MainActivity.readCardID_From_RFIDCardReadActivity.wait();
@@ -24,10 +26,16 @@ public class RFIDCardReadActivity implements Runnable {
                 CardRead cardRead = new CardRead();
                 cardRead.sendReadCardCmd();
                 Thread.sleep(300);
-                MainActivity.readCardID_From_RFIDCardReadActivity = cardRead.receiveCardMessage();
+                synchronized (MainActivity.readCardID_From_RFIDCardReadActivity){
+                    MainActivity.readCardID_From_RFIDCardReadActivity = cardRead.receiveCardMessage();
+                }
+                System.out.println(MainActivity.readCardID_From_RFIDCardReadActivity);
+                cardRead.releaseSocket();
                 Thread.sleep(300);
 
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

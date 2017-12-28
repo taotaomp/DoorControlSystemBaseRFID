@@ -19,20 +19,25 @@ public class DBActivity implements Runnable {
         while (true) {
             while (true) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (!tempCardIDToAvoidDBExecuteRepeat.equals(MainActivity.readCardID_From_RFIDCardReadActivity)) {
-                    tempCardIDToAvoidDBExecuteRepeat = MainActivity.readCardID_From_RFIDCardReadActivity;
-                    break;
+                synchronized (MainActivity.readCardID_From_RFIDCardReadActivity){
+                    if (!tempCardIDToAvoidDBExecuteRepeat.equals(MainActivity.readCardID_From_RFIDCardReadActivity)) {
+                        tempCardIDToAvoidDBExecuteRepeat = MainActivity.readCardID_From_RFIDCardReadActivity;
+                        break;
+                    }
                 }
+
             }
             try {
-                if (staffBase.checkStaff(tempCardIDToAvoidDBExecuteRepeat)) {
-                    MainActivity.staffInfo_From_DBActivity = staffBase.staffInfoPack(tempCardIDToAvoidDBExecuteRepeat);
-                } else {
-                    MainActivity.staffInfo_From_DBActivity = Const.NoResult;
+                synchronized (MainActivity.staffInfo_From_DBActivity){
+                    if (staffBase.checkStaff(tempCardIDToAvoidDBExecuteRepeat)) {
+                        MainActivity.staffInfo_From_DBActivity = staffBase.staffInfoPack(tempCardIDToAvoidDBExecuteRepeat);
+                    } else {
+                        MainActivity.staffInfo_From_DBActivity = Const.NoResult;
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

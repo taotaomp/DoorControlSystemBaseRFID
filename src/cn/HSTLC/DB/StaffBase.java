@@ -15,11 +15,6 @@ public class StaffBase {
      */
     public StaffBase() {
         dataBase = new DataBase();
-        try {
-            staffContainer = dataBase.infoRead("");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -30,8 +25,9 @@ public class StaffBase {
      * @throws SQLException
      */
     public boolean checkStaff(String cardID) throws SQLException {
+        staffContainer = dataBase.infoRead("");
         while (staffContainer.next()) {
-            String cardIDTemp = staffContainer.getString(DBColumn.CardID.toString());
+            String cardIDTemp = staffContainer.getString(DBColumn.CardID.toString()).trim();
             if (cardID.equals(cardIDTemp)) {
                 return true;
             }
@@ -41,11 +37,12 @@ public class StaffBase {
 
     /**
      * 封装读到的员工信息
+     *
      * @param cardID
      * @return 员工信息，各项用‘#’分隔 如失败则返回NaN
      */
     public String staffInfoPack(String cardID) throws SQLException {
-        ResultSet resultSet = dataBase.infoRead(cardID);
+        ResultSet resultSet = dataBase.infoRead("cardID=" + "\'" + cardID + "\'");
         String temp;
         if (resultSet.next()) {
             temp =
@@ -90,9 +87,10 @@ public class StaffBase {
 
     /**
      * 关闭数据库的方法
+     *
      * @return true成功 false失败
      */
-    public boolean DBClose(){
+    public boolean DBClose() {
         return dataBase.closeConnection();
     }
 

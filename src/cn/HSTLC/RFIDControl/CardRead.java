@@ -4,6 +4,7 @@ import cn.HSTLC.ToolConst.Const;
 import cn.HSTLC.WIFIControl.WiFiCon;
 import cn.HSTLC.WIFIControl.WiFiOperation;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public class CardRead {
@@ -23,5 +24,13 @@ public class CardRead {
      */
     public String receiveCardMessage(){
         return WiFiOperation.messageReceiver(socket);
+    }
+
+    /**
+     * 释放socket连接
+     * @throws IOException
+     */
+    public void releaseSocket() throws IOException {
+        socket.close();
     }
 }

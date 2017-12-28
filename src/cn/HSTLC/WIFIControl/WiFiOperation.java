@@ -39,7 +39,7 @@ public class WiFiOperation {
             InputStream is = socket.getInputStream();
             bytes = new byte[is.available()];
             is.read(bytes);
-            return HexStrConvert.bytesToHexString(bytes);
+            return HexStrConvert.bytesToHexString(bytes).trim();
         } catch (IOException e) {
             e.printStackTrace();
             return Const.NoResult;
