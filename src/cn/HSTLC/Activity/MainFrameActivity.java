@@ -1,5 +1,6 @@
 package cn.HSTLC.Activity;
 
+import cn.HSTLC.RFIDControl.DoorOpen;
 import cn.HSTLC.ToolConst.Const;
 import cn.HSTLC.UI.MainFrame;
 
@@ -38,7 +39,10 @@ public class MainFrameActivity implements Runnable {
                 }
                 if(!tempStaffInfoToAvoidMainFrameExecuteRepeat.equals(MainActivity.staffInfo_From_DBActivity)){
                     tempStaffInfoToAvoidMainFrameExecuteRepeat = MainActivity.staffInfo_From_DBActivity;
-                    mainFrame.haveCardUI(tempStaffInfoToAvoidMainFrameExecuteRepeat);       //调用有卡时的UI，并装载员工信息
+                    if(!tempStaffInfoToAvoidMainFrameExecuteRepeat.equals(Const.NoResult)) {    //当读到的员工信息不是无信息常量时才执行装载
+                        mainFrame.haveCardUI(tempStaffInfoToAvoidMainFrameExecuteRepeat);       //调用有卡时的UI，并装载员工信息
+                        new DoorOpen().sendOpenDoorCmd();       //开门
+                    }
                 }
             }
         }

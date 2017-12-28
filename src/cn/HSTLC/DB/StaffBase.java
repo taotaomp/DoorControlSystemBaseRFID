@@ -49,13 +49,13 @@ public class StaffBase {
         String temp;
         if (resultSet.next()) {
             temp =
-                    resultSet.getString(DBColumn.Name.toString()) + '#'
-                            + resultSet.getString(DBColumn.Sex.toString()) + '#'
-                            + resultSet.getString(DBColumn.JobNum.toString()) + '#'
-                            + resultSet.getString(DBColumn.Department.toString()) + '#'
-                            + resultSet.getString(DBColumn.Position.toString()) + '#'
-                            + resultSet.getString(DBColumn.CardID.toString()) + '#'
-                            + resultSet.getString(DBColumn.Date.toString())
+                    resultSet.getString(DBColumn.Name.toString()).trim() + '#'
+                            + resultSet.getString(DBColumn.Sex.toString()).trim() + '#'
+                            + resultSet.getString(DBColumn.JobNum.toString()).trim() + '#'
+                            + resultSet.getString(DBColumn.Department.toString()).trim() + '#'
+                            + resultSet.getString(DBColumn.Position.toString()).trim() + '#'
+                            + resultSet.getString(DBColumn.CardID.toString()).trim() + '#'
+                            + resultSet.getString(DBColumn.Date.toString()).trim()
             ;
             return temp;
         } else {

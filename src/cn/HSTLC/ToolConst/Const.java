@@ -8,7 +8,7 @@ public class Const {
     public static String usr = "root";
     public static String passwd = "hu1song2tao3";
     public static final String dbDriver = "com.mysql.jdbc.Driver";
-    public static String dbTableName = "jdbctest";
+    public static String dbTableName = "rfiddoorcontrolsys";
 
     //Wifi常量
     public static String CardIP = "192.168.0.162";
