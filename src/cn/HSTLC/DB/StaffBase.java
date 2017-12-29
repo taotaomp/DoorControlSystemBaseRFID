@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 public class StaffBase {
 
-    private ResultSet staffContainer;
     private DataBase dataBase;
 
     /**
@@ -25,7 +24,7 @@ public class StaffBase {
      * @throws SQLException
      */
     public boolean checkStaff(String cardID) throws SQLException {
-        staffContainer = dataBase.infoRead("");
+        ResultSet staffContainer = dataBase.infoRead("");
         while (staffContainer.next()) {
             String cardIDTemp = staffContainer.getString(DBColumn.CardID.toString()).trim();
             if (cardID.equals(cardIDTemp)) {

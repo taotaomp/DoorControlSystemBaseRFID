@@ -9,7 +9,7 @@ public class RFIDCardReadActivity implements Runnable {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.println("Rfid活动运行中");
             } catch (InterruptedException e) {
                 e.printStackTrace();
